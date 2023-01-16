@@ -163,7 +163,6 @@ def web_review_post():
     data = open(image_receive + route_final_receive, 'rb')
     s3.Bucket(BUCKET_NAME).put_object(
         Key=route_final_receive, Body=data, ContentType='image/jpg')
-
     doc = {
         'deal_tags':deal_tags_receive,
         'textContents':textContents_receive,
