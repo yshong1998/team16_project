@@ -61,6 +61,7 @@ def TabletReview():
     return render_template('TabletReview.html')
 
 
+
 @app.route("/review", methods=["POST"])
 def web_review_post():
     review_receive = request.form['review_give']
