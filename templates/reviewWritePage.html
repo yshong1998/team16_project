@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <title>리뷰 등록하기</title>
+</head>
+<style>
+    * {
+            /*font-family: 'Gowun Dodum', sans-serif;*/
+            /*font-family: 'Open Sans', sans-serif;*/
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+.board_wrap {
+    width: 1000px;
+    margin: auto;
+}
+
+.board_title {
+    font-size: x-large;
+    padding: 15px 0px 15px 0px;
+    border-bottom: 1px solid black;
+}
+
+.board_select {
+    /*background-color: red;*/
+    width: 100%;
+    padding: 15px 0px 0px 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board_info {
+    /*background-color: blue;*/
+    padding: 0px 0px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mytitle {
+    height: 300px;
+    width: 100%;
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.techadvisor.com/wp-content/uploads/2022/09/iPhone-14-Pro_review_1.jpg?resize=1024%2C576&quality=50&strip=all");
+
+    background-position: center;
+    background-size: cover;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.board_info > div {
+    margin-right: 15px;
+}
+
+#board_info_2 {
+    width: 35%;
+}
+
+#board_info_3 {
+    margin-right: 0px;
+    width: 40%;
+}
+
+#board_select_1 {
+    margin-right: 15px;
+}
+
+#board_select_2 {
+    width: 40%;
+}
+
+.input-group > textarea {
+    height: 350px;
+}
+
+.bt_wrap button {
+    margin-right: 10px;
+}
+
+button {
+    float: right;
+}
+
+</style>
+<script>
+    function save_review() {
+        let board = $('#reviewTags').val()
+        let star = $('#reviewPoints').val()
+        let title = $('#title').val()
+        let writer = $('#writer').val()
+        let password = $('#password').val()
+        let review = $('#review').val()
+        let image_URL = $('#image_URL').val()
+
+        $.ajax({
+            type: 'POST',
+            url: '/review',
+            data: {
+                board_give: board,
+                star_give: star,
+                title_give: title,
+                writer_give: writer,
+                password_give: password,
+                review_give: review,
+                image_give: image_URL
+            },
+            success: function (response) {
+                alert(response['msg'])
+                location.href='/'
+            }
+        })
+    }
+    function reviewTablet(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `TabletReview.html?${temp.id}`
+        }
+        function reviewPhone(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `smartPhoneReview.html?${temp.id}`
+        }
+        function reviewwatch(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `smartWatchReview.html?${temp.id}`
+        }
+        function reviewEtc(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `etcReview.html?${temp.id}`
+        }
+        function reviewComputer(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `computerReview.html?${temp.id}`
+            // let temp_html = `
+            //                                  <div class="col" id="${title}" onclick="clicked(this)">
+            //                                     <div id="${title}" class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+            //                                          style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${image_URL}') ;">
+            //                                         <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-2">
+            //                                             <h2 class="pt-5 mt-5 mb-4 display-6 lh-1">${title}</h2>
+            //                                             <ul class="d-flex list-unstyled mt-auto">
+            //                                                 <li class="me-auto">
+            //                                                     <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
+            //                                                          class="rounded-circle border border-white">
+            //                                                 </li>
+            //                                                 <li class="d-flex align-items-center me-3">
+            //                                                     <svg class="bi me-2" width="1em" height="1em">
+            //                                                         <use xlink:href="#geo-fill"/>
+            //                                                     </svg>
+            //                                                     <small>${writer}</small>
+            //                                                 </li>
+            //                                                 <li class="d-flex align-items-center">
+            //                                                     <svg class="bi me-2" width="1em" height="1em">
+            //                                                         <use xlink:href="#calendar3"/>
+            //                                                     </svg>
+            //                                                     <small>${star_image}</small>
+            //                                                 </li>
+            //                                             </ul>
+            //                                         </div>
+            //                                     </div>
+            //                                 `
+            //             $('#review-box').append(temp_html)
+
+        }
+</script>
+<body>
+<div class="container">
+            <header class="d-flex justify-content-center py-3">
+                <ul class="nav nav-pills gap-2">
+                    <li class="nav-item"><a href="/" class="nav-link" aria-current="page">전체</a></li>
+                    <li class="nav-item"><a href="#" onclick="reviewComputer(this)" class="nav-link" aria-current="page" id="1">컴퓨터</a></li>
+                    <li class="nav-item"><a href="#" onclick="reviewTablet(this)" class="nav-link" id="2">태블릿 PC</a></li>
+                    <li class="nav-item"><a href="#" onclick="reviewPhone(this)" class="nav-link" id="3">스마트폰</a></li>
+                    <li class="nav-item"><a href="#" onclick="reviewwatch(this)" class="nav-link" id="4">스마트워치</a></li>
+                    <li class="nav-item"><a href="#" onclick="reviewEtc(this)" class="nav-link" id="5">기타</a></li>
+                </ul>
+            </header>
+        </div>
+<div class="mytitle">
+
+    <h1 class="text-shadow-2">IT리뷰 다나와</h1>
+    <!--        <button onclick="open_box()" class="btn btn-light">리뷰 작성하기 🔥</button>-->
+    <div class="writeReview">
+    </div>
+</div>
+<div class="board_wrap">
+    <div class="board_title">
+        <strong>리뷰 등록하기</strong>
+        <button onclick="save_review()" type="button" class="btn btn-secondary">등록</button>
+    </div>
+    <div class="board_select">
+        <div class="input-group mb-3" id="board_select_1">
+            <select class="form-select" id="reviewTags">
+                <option selected>게시판을 선택해주세요.</option>
+                <option value="1">컴퓨터</option>
+                <option value="2">태블릿PC</option>
+                <option value="3">스마트폰</option>
+                <option value="4">스마트워치</option>
+                <option value="5">기타</option>
+            </select>
+        </div>
+        <div class="input-group mb-3" id="board_select_2">
+            <select class="form-select" id="reviewPoints">
+                <option selected>별점을 선택해주세요.</option>
+                <option value="1">⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option value="5">⭐⭐⭐⭐⭐</option>
+            </select>
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <input id="image_URL" type="text" class="form-control" placeholder="이미지 URL 입력" aria-label="Username"
+               aria-describedby="image_URL">
+    </div>
+    <div class="board_info">
+        <div class="input-group mb-3">
+            <input id="title" type="text" class="form-control" placeholder="제목 입력" aria-label="Username"
+                   aria-describedby="title">
+        </div>
+        <div class="input-group mb-3" id="board_info_2">
+            <input id="writer" type="text" class="form-control" placeholder="글쓴이 입력" aria-label="Username"
+                   aria-describedby="writer">
+        </div>
+        <div class="input-group mb-3" id="board_info_3">
+            <input id="password" type="text" class="form-control" placeholder="비밀번호 입력" aria-label="Username"
+                   aria-describedby="password">
+        </div>
+    </div>
+    <div class="input-group">
+        <textarea id="review" class="form-control" aria-label="With textarea"></textarea>
+    </div>
+</div>
+</body>
+</html>
