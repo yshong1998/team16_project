@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 from key import *
-app = Flask(__name__, template_folder="templates")
 from pymongo import MongoClient
-
 import certifi
-
+import jwt
+import datetime
+import hashlib
 
 ca = certifi.where()
 app = Flask(__name__, template_folder="templates")
@@ -14,10 +14,8 @@ db = client.dbsparta
 
 
 SECRET_KEY = 'SPARTA'
-import jwt
-import datetime
 
-import hashlib
+
 
 
 @app.route("/review", methods=["POST"])
@@ -30,6 +28,7 @@ def s3_upload_img():
         Key=title, Body=data, ContentType='image/jpg')
 
     return jsonify({'msg': '등록완료'})
+
 
 
 @app.route('/')
