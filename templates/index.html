@@ -4,9 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta property="og:title" content="IT리뷰 다나와" />
-    <meta property="og:description" content="모든 IT기기들의 리뷰를 다룹니다" />
-    <meta property="og:image" content="https://www.techadvisor.com/wp-content/uploads/2022/09/iPhone-14-Pro_review_1.jpg?resize=1024%2C576&quality=50&strip=all" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -15,9 +12,7 @@
         crossorigin="anonymous"></script>
     <link href="{{url_for('static', filename='features.css')}}" rel="stylesheet" type="text/css">
 
-    <title>IT리뷰 다나와</title>
-<!--    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">-->
-<!--    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Open+Sans&display=swap" rel="stylesheet">-->
+    <title>당근나라</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     <style>
         .bd-placeholder-img {
@@ -35,21 +30,19 @@
         }
 
         * {
-            /*font-family: 'Gowun Dodum', sans-serif;*/
-            /*font-family: 'Open Sans', sans-serif;*/
             font-family: 'Noto Sans KR', sans-serif;
         }
 
         .writeReview {
             position: absolute;
             top: 470px;
-            right: 640px;
+            right: 100px;
         }
 
         .mytitle {
             height: 300px;
             width: 100%;
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.techadvisor.com/wp-content/uploads/2022/09/iPhone-14-Pro_review_1.jpg?resize=1024%2C576&quality=50&strip=all");
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img.png");
 
             background-position: center;
             background-size: cover;
@@ -62,61 +55,10 @@
             align-items: center;
         }
 
-        .btns-center {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        /*.mytitle > button {*/
-        /*    width: 200px;*/
-        /*    height: 50px;*/
-
-        /*    background-color: transparent;*/
-        /*    color: white;*/
-        /*    border-radius: 50px;*/
-        /*    border: 1px solid white;*/
-
-        /*    margin-top: 10px;*/
-        /*}*/
-
-        /*.mytitle > button:hover {*/
-        /*    border: 2px solid white;*/
-        /*}*/
-        .mycomment {
-            color: gray;
-        }
-
-        .wrap {
-            max-width: 1200px;
-            width: 95%;
-            margin: 20px auto 0px auto;
-        }
-
-        .mypost {
-            max-width: 500px;
-            width: 95%;
-
-            margin: 20px auto 0px;
-            box-shadow: 0px 0px 3px 0px gray;
-            padding: 20px;
-
-            display: none;
-        }
-
-        .btns-wrap {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            margin-top: 5px;
-        }
-
         .btns-wrap > .btn {
             margin-right: 10px;
         }
+
 
         .board_wrap {
             width: 1000px;
@@ -134,69 +76,22 @@
 
 
 
+
+
     </style>
-    <script>
 
-        // $(document).ready(function () {
-        //     listing();
-        // });
-        //
-        // function listing() {
-        //     $('#cards-box').empty()
-        //     $.ajax({
-        //         type: "GET",
-        //         url: "http://spartacodingclub.shop/web/api/movie",
-        //         data: {},
-        //         success: function (response) {
-        //             let rows = response['movies']
-        //             for (let i = 0; i < rows.length; ++i) {
-        //                 let title = rows[i]['title']
-        //                 let desc = rows[i]['desc']
-        //                 let image = rows[i]['image']
-        //                 let star = rows[i]['star']
-        //                 let comment = rows[i]['comment']
-        //
-        //                 let star_image = '⭐'.repeat(star)
-        //
-        //                 // console.log(title, desc, image, star, comment)
-        //
-        //                 let temp_html = `<div class="col">
-        //                                     <div class="card">
-        //                                         <img src="${image}"
-        //                                              class="card-img-top" alt="...">
-        //                                         <div class="card-body">
-        //                                             <h5 class="card-title">${title}</h5>
-        //                                             <p class="card-text">${desc}</p>
-        //                                             <p>${star_image}</p>
-        //                                             <p class="mycomment">${comment}</p>
-        //                                         </div>
-        //                                     </div>
-        //                                 </div>`
-        //                 $('#cards-box').append(temp_html)
-        //             }
-        //         }
-        //     })
-        // }
-
-        // function open_box() {
-        //     $('#post-box').show()
-        // }
-        // function close_box() {
-        //     $('#post-box').hide()
-        // }
-    </script>
     <script>
         $(document).ready(function () {
-            show_review();
+            show_list();
         });
 
-        function show_review() {
+        function show_list() {
             $.ajax({
                 type: 'GET',
-                url: '/review',
+                url: '/list',
                 data: {},
                 success: function (response) {
-                    let rows = response['reviews']
+                    let rows = response['lists']
                     for (let i = 0; i < rows.length; i++) {
                         let star = rows[i]['star']
                         let title = rows[i]['title']
@@ -235,6 +130,7 @@
                 }
             });
         }
+
         function clicked(temp) {
             console.log(temp.id)
             // let click = document.querySelector('.col')
@@ -304,6 +200,11 @@
             //                                     </div>
             //                                 `
             //             $('#review-box').append(temp_html)
+        //로그아웃
+                function logout() {
+            $.removeCookie('mytoken')
+            window.location.href = "/"
+        }
     </script>
 </head>
 
@@ -317,73 +218,20 @@
                 </div>
             </header>
 
+    <main>
         </div>
         <div class="mytitle">
-            <h1 class="text-shadow-2">IT리뷰 다나와</h1>
-            <!--        <button onclick="open_box()" class="btn btn-light">리뷰 작성하기 🔥</button>-->
-
+            <h1 class="text-shadow-2">당근나라</h1>
         </div>
     </main>
-
-<!--    <div class="mypost" id="post-box">-->
-<!--        <div class="form-floating">-->
-<!--            <input class="form-control" id="url">-->
-<!--            <label for="url">영화URL</label>-->
-<!--        </div>-->
-<!--        <div class="input-group mt-3">-->
-<!--            <label class="input-group-text" for="inputGroupSelect01">별점</label>-->
-<!--            <select class="form-select" id="inputGroupSelect01">-->
-<!--                <option selected>&#45;&#45;선택하기&#45;&#45;</option>-->
-<!--                <option value="1">⭐</option>-->
-<!--                <option value="2">⭐⭐</option>-->
-<!--                <option value="3">⭐⭐⭐</option>-->
-<!--                <option value="4">⭐⭐⭐⭐</option>-->
-<!--                <option value="5">⭐⭐⭐⭐⭐</option>-->
-<!--            </select>-->
-<!--        </div>-->
-<!--        <div class="form-floating mt-3">-->
-<!--            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"-->
-<!--                      style="height: 100px"></textarea>-->
-<!--            <label for="floatingTextarea2">코멘트</label>-->
-<!--        </div>-->
-<!--        <div class="btns-wrap">-->
-<!--            <button type="button" class="btn btn-dark">기록하기</button>-->
-<!--            <button onclick="close_box()" type="button" class="btn btn-outline-dark">닫기</button>-->
-<!--        </div>-->
-<!--    </div>-->
-
     <div class="b-example-divider"></div>
     <div class="container px-4 py-5 head" id="custom-cards">
-        <h2 class="pb-2 border-bottom">리뷰 모음들</h2>
+        <h2 class="pb-2 border-bottom">게시글</h2>
         <div class="writeReview">
             <button class="btn btn-secondary" onclick="location.href='reviewWritePage.html'">글 작성</button>
         </div>
-
         <div id = "review-box" class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5" >
-
         </div>
     </div>
-<!--    <div class="wrap">-->
-<!--        <div id="cards-box" class="row row-cols-1 row-cols-md-5 g-4">-->
-<!--            <div class="col">-->
-<!--                <div class="card">-->
-<!--                    <div >-->
-<!--                        <img src="https://cdn.pocket-lint.com/r/s/970x/assets/images/150265-laptops-review-macbook-pro-16-inch-review-a-typing-power-house-image1-ga7cf05o2j.jpg" class="img-thumbnail" alt="...">-->
-<!--                        <div style="background-color:green;">g</div>-->
-<!--                    </div>-->
-
-<!--                    <img src="https://cdn.pocket-lint.com/r/s/970x/assets/images/150265-laptops-review-macbook-pro-16-inch-review-a-typing-power-house-image1-ga7cf05o2j.jpg" class="card-img-top" alt="...">-->
-<!--                    <div class="card-body">-->
-<!--                        <h5 class="card-title">${title}</h5>-->
-<!--                        <p class="card-text">${desc}</p>-->
-<!--                        <p>${star_image}</p>-->
-<!--                        <p class="mycomment">${comment}</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
 
 </body>
-
-</html>
