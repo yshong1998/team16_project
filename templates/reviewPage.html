@@ -57,6 +57,7 @@
     border:1px solid;
     padding:10px 10px 10px 10px;
     margin: auto;
+    font-size: 150%;
 
 }
 .text_in_box {
@@ -65,12 +66,78 @@
     border:1px solid;
     padding:10px 10px 10px 10px;
     margin: auto;
+    font-size: 200%;
 }
 .carrot_desc {
     padding:10px 10px 10px 10px;
 }
+
+
 </style>
 <script>
+    $(document).ready(function () {
+            show_clicked_review()
+        });
+    function show_clicked_review() {
+        $.ajax({
+            type: 'GET',
+            url: '/api/read',
+            data: {},
+            success: function (response) {
+                const getTitle = decodeURI(location.href.split('?')[1])
+                let rows = response['post']
+
+                for (let i = 0; i < rows.length; i++) {
+                    let title = rows[i]['title']
+                    let price = rows[i]['price']
+                    let phone_number = rows[i]['phone_number']
+                    let contents = rows[i]['textContents']
+
+                    if (title != getTitle) {
+                        continue
+                    }
+
+
+                    let temp_html = `<div class="carrot_title">
+                                        <div class="text_in_box" id="title">
+                                            ${title}
+                                        </div>
+                                    </div>
+                                    <div class="carrot_price">
+                                        <div class="text_in_box" id="price">
+                                            ${price}
+                                        </div>
+                                    </div>
+                                    <div class="carrot_contact">
+                                        <div class="text_in_box" id="contact">
+                                            ${phone_number}
+                                        </div>
+                                    </div>
+                                    <div class="carrot_desc">
+                                        <div class="text_desc" id="text_box">
+                                            ${contents}
+                                        </div>
+                                    </div>`
+                    $('#box').append(temp_html)
+
+                }
+            }
+        });
+    }
+
+    function delete_review(title) {
+        $.ajax({
+            type: 'POST',
+            url: '/delete',
+            data: {
+                title_give: title,
+            },
+            success: function (response) {
+                alert(response['msg'])
+                location.href = '/'
+            }
+        })
+    }
 </script>
 <body>
 <div class="container">
@@ -90,35 +157,28 @@
     <div class="writeReview">
     </div>
 </div>
-<div class="outline">
-    <div class="carrot_title">
-        <div class="text_in_box" id="title">
-            title
-        </div>
-    </div>
-    <div class="carrot_product">
-        <div class="text_in_box" id="product">
-            product
-        </div>
-    </div>
-    <div class="carrot_price">
-        <div class="text_in_box" id="text">
-            price
-        </div>
-    </div>
-    <div class="carrot_contact">
-        <div class="text_in_box" id="contact">
-            contact
-        </div>
-    </div>
-    <div class="carrot_desc">
-        <div class="text_desc" id="text_box">
-            text box
-        </div>
-    </div>
+<div class="outline" id="box">
+<!--    <div class="carrot_title">-->
+<!--        <div class="text_in_box" id="title">-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="carrot_price">-->
+<!--        <div class="text_in_box" id="price">-->
+<!--            price-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="carrot_contact">-->
+<!--        <div class="text_in_box" id="contact">-->
+<!--            contact-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="carrot_desc">-->
+<!--        <div class="text_desc" id="text_box">-->
+<!--            text box-->
+<!--        </div>-->
+<!--    </div>-->
 
 </div>
-
-
 </body>
 </html>

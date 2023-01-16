@@ -106,6 +106,8 @@ button {
         let image_URL = $('#image_URL').val()
         let price = $('#price').val()
         let route_final = $('#route_final').val()
+        let phone_number = $('#phoneNumber').val()
+        let Email = $('#Email').val()
         console.log(deal_tags,title,textContents,image_URL,price,route_final)
         $.ajax({
             type: 'POST',
@@ -116,7 +118,9 @@ button {
                 textContents_give: textContents,
                 image_give: image_URL,
                 price_give: price,
-                route_final_give: route_final
+                route_final_give: route_final,
+                phone_number_give: phone_number,
+                Email_give: Email
             },
             success: function (response) {
                 alert(response['msg'])
@@ -155,6 +159,14 @@ button {
             <input id="title" type="text" class="form-control" placeholder="제목 입력" aria-label="Username"
                    aria-describedby="title">
             <input id="price" type="text" class="form-control" placeholder="가격" aria-label="Username"
+                   aria-describedby="title">
+        </div>
+    </div>
+    <div class="board_info">
+        <div class="input-group mb-3">
+            <input id="phoneNumber" type="text" class="form-control" placeholder="연락처" aria-label="userPhoneNumber"
+                   aria-describedby="title">
+            <input id="Email" type="text" class="form-control" placeholder="이메일" aria-label="UserEmail"
                    aria-describedby="title">
         </div>
     </div>

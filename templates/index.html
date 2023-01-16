@@ -35,8 +35,8 @@
 
         .writeReview {
             position: absolute;
-            top: 470px;
-            right: 100px;
+            top: 400px;
+            right: 350px;
         }
 
         .mytitle {
@@ -70,7 +70,7 @@
             border-bottom: 1px solid black;
         }
         .buttons-container{
-            margin-left: 500px;
+            margin-left: 900px;
         }
 
 
@@ -87,21 +87,21 @@
         function show_list() {
             $.ajax({
                 type: 'GET',
-                url: '/list',
+                url: '/api/list',
                 data: {},
                 success: function (response) {
-                    let rows = response['lists']
+                    let rows = response['post']
                     for (let i = 0; i < rows.length; i++) {
-                        let star = rows[i]['star']
+                        let deal_tag = rows[i]['deal_tags']
                         let title = rows[i]['title']
-                        let writer = rows[i]['writer']
+                        let price = rows[i]['price']
                         let image_URL = rows[i]['image_URL']
-                        let star_image = '⭐'.repeat(star)
                         let temp_html = `
                                              <div class="col" id="${title}" onclick="clicked(this)">
                                                 <div id="${title}" class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
                                                      style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${image_URL}') ;">
                                                     <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-2">
+                                                        <h4 class="pt-5 mt-5 mb-4 display-6 lh-1">${deal_tag}</h4>
                                                         <h2 class="pt-5 mt-5 mb-4 display-6 lh-1">${title}</h2>
                                                         <ul class="d-flex list-unstyled mt-auto">
                                                             <li class="me-auto">
@@ -112,13 +112,12 @@
                                                                 <svg class="bi me-2" width="1em" height="1em">
                                                                     <use xlink:href="#geo-fill"/>
                                                                 </svg>
-                                                                <small>${writer}</small>
+                                                                <small>${price}</small>
                                                             </li>
                                                             <li class="d-flex align-items-center">
                                                                 <svg class="bi me-2" width="1em" height="1em">
                                                                     <use xlink:href="#calendar3"/>
                                                                 </svg>
-                                                                <small>${star_image}</small>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -136,31 +135,7 @@
             window.location.href = `reviewPage.html?${temp.id}`
             // console.log(click['id'])
         }
-        function reviewTablet(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `TabletReview.html?${temp.id}`
-        }
-        function reviewPhone(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `smartPhoneReview.html?${temp.id}`
-        }
-        function reviewwatch(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `smartWatchReview.html?${temp.id}`
-        }
-        function reviewEtc(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `etcReview.html?${temp.id}`
-        }
-        function reviewComputer(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `computerReview.html?${temp.id}`
-        }
+
         function userRegister(temp) {
             // $('.col').empty()
             console.log(temp)
@@ -208,15 +183,15 @@
 </head>
 
 <body>
-    <main>
-        <div class="buttons-container">
-            <header class="d-flex justify-content-center py-3">
-                <div>
-                    <button class="btn btn-secondary" onclick="location.href='register.html'">회원 가입</button>
-                    <button class="btn btn-secondary" onclick="location.href='login.html'">로그인</button>
-                </div>
-            </header>
-        </div>
+
+    <div class="buttons-container">
+        <header class="d-flex justify-content-center py-3">
+            <div>
+                <button class="btn btn-secondary" onclick="location.href='register.html'">회원 가입</button>
+                <button class="btn btn-secondary" onclick="location.href='login.html'">로그인</button>
+            </div>
+        </header>
+    </div>
     <main>
         <div class="mytitle">
             <h1 class="text-shadow-2">당근나라</h1>

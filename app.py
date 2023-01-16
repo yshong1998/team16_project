@@ -7,7 +7,7 @@ import certifi
 
 
 ca = certifi.where()
-app = Flask(__name__, template_folder="templates")
+
 
 client = MongoClient('mongodb+srv://test:sparta@cluster0.dhd2t83.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.dbsparta
@@ -125,32 +125,6 @@ def reviewpage():
     return render_template('reviewPage.html')
 
 
-@app.route('/etcReview.html')
-def etcReview():
-    return render_template('etcReview.html')
-
-
-@app.route('/computerReview.html')
-def computerReview():
-    return render_template('computerReview.html')
-
-
-@app.route('/smartPhoneReview.html')
-def smartPhoneReview():
-    return render_template('smartPhoneReview.html')
-
-
-@app.route('/smartWatchReview.html')
-def smartWatchReview():
-    return render_template('smartWatchReview.html')
-
-
-@app.route('/TabletReview.html')
-def TabletReview():
-    return render_template('TabletReview.html')
-
-
-
 @app.route("/api/create", methods=["POST"])
 def web_review_post():
 
@@ -160,6 +134,8 @@ def web_review_post():
     image_receive = request.form['image_give']
     price_receive = request.form['price_give']
     route_final_receive = request.form['route_final_give']
+    phone_number_receive = request.form['phone_number_give']
+    Email_receive = request.form['Email_give']
     data = open(image_receive + route_final_receive, 'rb')
     s3.Bucket(BUCKET_NAME).put_object(
         Key=route_final_receive, Body=data, ContentType='image/jpg')
@@ -169,11 +145,26 @@ def web_review_post():
         'title':title_receive,
         'image_URL':image_receive,
         'price': price_receive,
-        'route_final': route_final_receive
+        'route_final': route_final_receive,
+        'phone_number': phone_number_receive,
+        'Email': Email_receive
     }
 
     db.post.insert_one(doc)
     return jsonify({'msg' : '게시글이 등록되었습니다!'})
+
+
+@app.route("/api/list", methods = ["GET"])
+def web_post_listup():
+    post_list = list(db.post.find({},{'_id':False}))
+    return jsonify({'post': post_list})
+
+
+@app.route("/api/read", methods = ["GET"])
+def web_post_read():
+    post_list = list(db.post.find({},{'_id':False}))
+    return jsonify({'post': post_list})
+
 
 @app.route("/delete", methods=["POST"])
 def web_delete_review():
@@ -181,6 +172,7 @@ def web_delete_review():
     print(title_receive + "asd")
     db.review.delete_one({'title': title_receive})
     return jsonify({'msg':'리뷰가 삭제되었습니다!'})
+
 
 @app.route("/update", methods=["POST"])
 def web_update_review():
