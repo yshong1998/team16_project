@@ -42,7 +42,8 @@
         .mytitle {
             height: 300px;
             width: 100%;
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../static/img.png');
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("img.png");
+
             background-position: center;
             background-size: cover;
 
@@ -72,95 +73,43 @@
         .buttons-container{
             margin-left: 500px;
         }
-
-
-
-
-
     </style>
 
     <script>
         $(document).ready(function () {
-            show_list();
+            review_list();
         });
 
-        function show_list() {
+        function review_list() {
             $.ajax({
                 type: 'GET',
-                url: '/list',
+                url: '/review',
                 data: {},
                 success: function (response) {
-                    let rows = response['lists']
+                    let rows = response['reviews']
                     for (let i = 0; i < rows.length; i++) {
-                        let star = rows[i]['star']
                         let title = rows[i]['title']
-                        let writer = rows[i]['writer']
-                        let image_URL = rows[i]['image_URL']
-                        let star_image = '⭐'.repeat(star)
-                        let temp_html = `
-                                             <div class="col" id="${title}" onclick="clicked(this)">
-                                                <div id="${title}" class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-                                                     style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${image_URL}') ;">
-                                                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-2">
-                                                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1">${title}</h2>
-                                                        <ul class="d-flex list-unstyled mt-auto">
-                                                            <li class="me-auto">
-                                                                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
-                                                                     class="rounded-circle border border-white">
-                                                            </li>
-                                                            <li class="d-flex align-items-center me-3">
-                                                                <svg class="bi me-2" width="1em" height="1em">
-                                                                    <use xlink:href="#geo-fill"/>
-                                                                </svg>
-                                                                <small>${writer}</small>
-                                                            </li>
-                                                            <li class="d-flex align-items-center">
-                                                                <svg class="bi me-2" width="1em" height="1em">
-                                                                    <use xlink:href="#calendar3"/>
-                                                                </svg>
-                                                                <small>${star_image}</small>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                        let price = rows[i]['price']
+                        let board = rows[i]['board']
+                        let image = rows[i]['image_URL']
+
+                        let temp_html = `<div class="col">
+                                            <div class="card h-100">
+                                                <img src="${image}"
+                                                     class="card-img-top">
+                                                <div class="card-body">
+                                                    <p>${board}</p>
+                                                    <h5 class="card-title">${title}</h5>
+                                                    <p class="mycomment">${price}</p>
                                                 </div>
-                                            `
+                                            </div>
+                                        </div>`
                         $('#review-box').append(temp_html)
                     }
                 }
             });
         }
 
-        function clicked(temp) {
-            console.log(temp.id)
-            // let click = document.querySelector('.col')
-            window.location.href = `reviewPage.html?${temp.id}`
-            // console.log(click['id'])
-        }
-        function reviewTablet(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `TabletReview.html?${temp.id}`
-        }
-        function reviewPhone(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `smartPhoneReview.html?${temp.id}`
-        }
-        function reviewwatch(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `smartWatchReview.html?${temp.id}`
-        }
-        function reviewEtc(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `etcReview.html?${temp.id}`
-        }
-        function reviewComputer(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `computerReview.html?${temp.id}`
-        }
         function userRegister(temp) {
             // $('.col').empty()
             console.log(temp)
@@ -172,33 +121,7 @@
             window.location.href = `login.html?${temp.id}`
         }
             // let temp_html = `
-            //                                  <div class="col" id="${title}" onclick="clicked(this)">
-            //                                     <div id="${title}" class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-            //                                          style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${image_URL}') ;">
-            //                                         <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-2">
-            //                                             <h2 class="pt-5 mt-5 mb-4 display-6 lh-1">${title}</h2>
-            //                                             <ul class="d-flex list-unstyled mt-auto">
-            //                                                 <li class="me-auto">
-            //                                                     <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
-            //                                                          class="rounded-circle border border-white">
-            //                                                 </li>
-            //                                                 <li class="d-flex align-items-center me-3">
-            //                                                     <svg class="bi me-2" width="1em" height="1em">
-            //                                                         <use xlink:href="#geo-fill"/>
-            //                                                     </svg>
-            //                                                     <small>${writer}</small>
-            //                                                 </li>
-            //                                                 <li class="d-flex align-items-center">
-            //                                                     <svg class="bi me-2" width="1em" height="1em">
-            //                                                         <use xlink:href="#calendar3"/>
-            //                                                     </svg>
-            //                                                     <small>${star_image}</small>
-            //                                                 </li>
-            //                                             </ul>
-            //                                         </div>
-            //                                     </div>
-            //                                 `
-            //             $('#review-box').append(temp_html)
+            // <div class="col" id="${title}" onclick="clicked(this)">
         //로그아웃
                 function logout() {
             $.removeCookie('mytoken')
@@ -217,7 +140,6 @@
                 </div>
             </header>
         </div>
-    <main>
         <div class="mytitle">
             <h1 class="text-shadow-2">당근나라</h1>
         </div>
@@ -231,5 +153,4 @@
         <div id = "review-box" class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5" >
         </div>
     </div>
-
 </body>

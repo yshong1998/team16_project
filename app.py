@@ -9,7 +9,7 @@ import certifi
 ca = certifi.where()
 app = Flask(__name__, template_folder="templates")
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.dhd2t83.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
+client = MongoClient('mongodb+srv://test:sparta@cluster0.gvsa3p3.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.dbsparta
 
 
@@ -135,52 +135,24 @@ def reviewpage():
     return render_template('reviewPage.html')
 
 
-@app.route('/etcReview.html')
-def etcReview():
-    return render_template('etcReview.html')
-
-
-@app.route('/computerReview.html')
-def computerReview():
-    return render_template('computerReview.html')
-
-
-@app.route('/smartPhoneReview.html')
-def smartPhoneReview():
-    return render_template('smartPhoneReview.html')
-
-
-@app.route('/smartWatchReview.html')
-def smartWatchReview():
-    return render_template('smartWatchReview.html')
-
-
-@app.route('/TabletReview.html')
-def TabletReview():
-    return render_template('TabletReview.html')
-
-
-
 @app.route("/review", methods=["POST"])
 def web_review_post():
     review_receive = request.form['review_give']
-    star_receive = request.form['star_give']
     title_receive = request.form['title_give']
-    password_receive = request.form['password_give']
-    writer_receive = request.form['writer_give']
     board_receive = request.form['board_give']
     image_receive = request.form['image_give']
+    price_receive = request.form['price_give']
+
     doc = {
         'review':review_receive,
-        'star':star_receive,
         'title':title_receive,
         'board':board_receive,
-        'writer':writer_receive,
-        'password':password_receive,
-        'image_URL':image_receive
+        'image_URL':image_receive,
+        'price': price_receive
+
     }
     db.review.insert_one(doc)
-    return jsonify({'msg':'리뷰가 등록되었습니다!'})
+    return jsonify({'msg':'등록되었습니다!'})
 
 @app.route("/delete", methods=["POST"])
 def web_delete_review():
