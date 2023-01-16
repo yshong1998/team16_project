@@ -59,6 +59,25 @@
             margin-right: 10px;
         }
 
+
+        .board_wrap {
+            width: 1000px;
+            margin: auto;
+        }
+
+        .board_title {
+            font-size: x-large;
+            padding: 15px 0px 15px 0px;
+            border-bottom: 1px solid black;
+        }
+        .buttons-container{
+            margin-left: 500px;
+        }
+
+
+
+
+
     </style>
 
     <script>
@@ -111,52 +130,93 @@
                 }
             });
         }
+
+        function clicked(temp) {
+            console.log(temp.id)
+            // let click = document.querySelector('.col')
+            window.location.href = `reviewPage.html?${temp.id}`
+            // console.log(click['id'])
+        }
+        function reviewTablet(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `TabletReview.html?${temp.id}`
+        }
+        function reviewPhone(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `smartPhoneReview.html?${temp.id}`
+        }
+        function reviewwatch(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `smartWatchReview.html?${temp.id}`
+        }
+        function reviewEtc(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `etcReview.html?${temp.id}`
+        }
+        function reviewComputer(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `computerReview.html?${temp.id}`
+        }
+        function userRegister(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `register.html?${temp.id}`
+        }
+        function userLogin(temp) {
+            // $('.col').empty()
+            console.log(temp)
+            window.location.href = `login.html?${temp.id}`
+        }
+            // let temp_html = `
+            //                                  <div class="col" id="${title}" onclick="clicked(this)">
+            //                                     <div id="${title}" class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+            //                                          style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${image_URL}') ;">
+            //                                         <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-2">
+            //                                             <h2 class="pt-5 mt-5 mb-4 display-6 lh-1">${title}</h2>
+            //                                             <ul class="d-flex list-unstyled mt-auto">
+            //                                                 <li class="me-auto">
+            //                                                     <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
+            //                                                          class="rounded-circle border border-white">
+            //                                                 </li>
+            //                                                 <li class="d-flex align-items-center me-3">
+            //                                                     <svg class="bi me-2" width="1em" height="1em">
+            //                                                         <use xlink:href="#geo-fill"/>
+            //                                                     </svg>
+            //                                                     <small>${writer}</small>
+            //                                                 </li>
+            //                                                 <li class="d-flex align-items-center">
+            //                                                     <svg class="bi me-2" width="1em" height="1em">
+            //                                                         <use xlink:href="#calendar3"/>
+            //                                                     </svg>
+            //                                                     <small>${star_image}</small>
+            //                                                 </li>
+            //                                             </ul>
+            //                                         </div>
+            //                                     </div>
+            //                                 `
+            //             $('#review-box').append(temp_html)
         //로그아웃
                 function logout() {
             $.removeCookie('mytoken')
             window.location.href = "/"
-
         }
-
     </script>
 </head>
 
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg bg-light navbar-light ">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
-                    aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#">당근나라</a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                </ul>
-                <ul class="d-flex navbar-nav">
-                        <li class="nav-item dropdown">
-
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
-                                {{ nickname }}
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" onclick="logout()">로그아웃</a></li>
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/login">로그인</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
+    <main>
+        <div class="buttons-container">
+            <header class="d-flex justify-content-center py-3">
+                <div>
+                    <button class="btn btn-secondary" onclick="location.href='register.html'">회원 가입</button>
+                    <button class="btn btn-secondary" onclick="location.href='login.html'">로그인</button>
+                </div>
+            </header>
 
     <main>
         </div>
