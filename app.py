@@ -14,22 +14,12 @@ db = client.dbsparta
 
 
 SECRET_KEY = 'SPARTA'
+
+
 import jwt
 import datetime
 
 import hashlib
-
-
-@app.route("/review", methods=["POST"])
-def s3_upload_img():
-    review_route = request.form['image_give']
-    title = request.form['title_give']
-    data = open(review_route + title, 'rb')
-    # data = open(review_route + f + '.jpg', 'rb')
-    s3.Bucket(BUCKET_NAME).put_object(
-        Key=title, Body=data, ContentType='image/jpg')
-
-    return jsonify({'msg': '등록완료'})
 
 
 @app.route('/')
@@ -40,7 +30,7 @@ def home():
         user_info = db.user.find_one({"id": payload['id']})
         return render_template('index.html', nickname=user_info["nick"])
     except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+        return render_template('index.html')
     except jwt.exceptions.DecodeError:
         return render_template('index.html')
 
@@ -161,26 +151,30 @@ def TabletReview():
 
 
 
-@app.route("/review", methods=["POST"])
+@app.route("/api/create", methods=["POST"])
 def web_review_post():
-    review_receive = request.form['review_give']
-    star_receive = request.form['star_give']
+
+    deal_tags_receive = request.form['deal_tags_give']
+    textContents_receive = request.form['textContents_give']
     title_receive = request.form['title_give']
-    password_receive = request.form['password_give']
-    writer_receive = request.form['writer_give']
-    board_receive = request.form['board_give']
     image_receive = request.form['image_give']
+    price_receive = request.form['price_give']
+    route_final_receive = request.form['route_final_give']
+    data = open(image_receive + route_final_receive, 'rb')
+    s3.Bucket(BUCKET_NAME).put_object(
+        Key=route_final_receive, Body=data, ContentType='image/jpg')
+
     doc = {
-        'review':review_receive,
-        'star':star_receive,
+        'deal_tags':deal_tags_receive,
+        'textContents':textContents_receive,
         'title':title_receive,
-        'board':board_receive,
-        'writer':writer_receive,
-        'password':password_receive,
-        'image_URL':image_receive
+        'image_URL':image_receive,
+        'price': price_receive,
+        'route_final': route_final_receive
     }
-    db.review.insert_one(doc)
-    return jsonify({'msg':'리뷰가 등록되었습니다!'})
+
+    db.post.insert_one(doc)
+    return jsonify({'msg' : '게시글이 등록되었습니다!'})
 
 @app.route("/delete", methods=["POST"])
 def web_delete_review():

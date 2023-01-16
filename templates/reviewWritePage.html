@@ -19,7 +19,7 @@
             /*font-family: 'Open Sans', sans-serif;*/
             font-family: 'Noto Sans KR', sans-serif;
         }
-.board_wrap {
+.deal_wrap {
     width: 1000px;
     margin: auto;
 }
@@ -30,7 +30,7 @@
     border-bottom: 1px solid black;
 }
 
-.board_select {
+.deal_tags_select {
     /*background-color: red;*/
     width: 100%;
     padding: 15px 0px 0px 0px;
@@ -51,7 +51,7 @@
 .mytitle {
     height: 300px;
     width: 100%;
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.techadvisor.com/wp-content/uploads/2022/09/iPhone-14-Pro_review_1.jpg?resize=1024%2C576&quality=50&strip=all");
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../static/img.png");
 
     background-position: center;
     background-size: cover;
@@ -99,155 +99,67 @@ button {
 
 </style>
 <script>
-    function save_review() {
-        let board = $('#reviewTags').val()
-        let star = $('#reviewPoints').val()
+    function create_post() {
+        let deal_tags = $('#deal_tags').val()
         let title = $('#title').val()
-        let writer = $('#writer').val()
-        let password = $('#password').val()
-        let review = $('#review').val()
+        let textContents = $('#contents').val()
         let image_URL = $('#image_URL').val()
-
+        let price = $('#price').val()
+        let route_final = $('#route_final').val()
+        console.log(deal_tags,title,textContents,image_URL,price,route_final)
         $.ajax({
             type: 'POST',
-            url: '/review',
+            url: '/api/create',
             data: {
-                board_give: board,
-                star_give: star,
+                deal_tags_give: deal_tags,
                 title_give: title,
-                writer_give: writer,
-                password_give: password,
-                review_give: review,
-                image_give: image_URL
+                textContents_give: textContents,
+                image_give: image_URL,
+                price_give: price,
+                route_final_give: route_final
             },
             success: function (response) {
                 alert(response['msg'])
                 location.href='/'
-            }
+            },
         })
     }
-    function reviewTablet(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `TabletReview.html?${temp.id}`
-        }
-        function reviewPhone(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `smartPhoneReview.html?${temp.id}`
-        }
-        function reviewwatch(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `smartWatchReview.html?${temp.id}`
-        }
-        function reviewEtc(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `etcReview.html?${temp.id}`
-        }
-        function reviewComputer(temp) {
-            // $('.col').empty()
-            console.log(temp)
-            window.location.href = `computerReview.html?${temp.id}`
-            // let temp_html = `
-            //                                  <div class="col" id="${title}" onclick="clicked(this)">
-            //                                     <div id="${title}" class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
-            //                                          style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${image_URL}') ;">
-            //                                         <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-2">
-            //                                             <h2 class="pt-5 mt-5 mb-4 display-6 lh-1">${title}</h2>
-            //                                             <ul class="d-flex list-unstyled mt-auto">
-            //                                                 <li class="me-auto">
-            //                                                     <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
-            //                                                          class="rounded-circle border border-white">
-            //                                                 </li>
-            //                                                 <li class="d-flex align-items-center me-3">
-            //                                                     <svg class="bi me-2" width="1em" height="1em">
-            //                                                         <use xlink:href="#geo-fill"/>
-            //                                                     </svg>
-            //                                                     <small>${writer}</small>
-            //                                                 </li>
-            //                                                 <li class="d-flex align-items-center">
-            //                                                     <svg class="bi me-2" width="1em" height="1em">
-            //                                                         <use xlink:href="#calendar3"/>
-            //                                                     </svg>
-            //                                                     <small>${star_image}</small>
-            //                                                 </li>
-            //                                             </ul>
-            //                                         </div>
-            //                                     </div>
-            //                                 `
-            //             $('#review-box').append(temp_html)
-
-        }
 </script>
 <body>
-<div class="container">
-            <header class="d-flex justify-content-center py-3">
-                <ul class="nav nav-pills gap-2">
-                    <li class="nav-item"><a href="/" class="nav-link" aria-current="page">전체</a></li>
-                    <li class="nav-item"><a href="#" onclick="reviewComputer(this)" class="nav-link" aria-current="page" id="1">컴퓨터</a></li>
-                    <li class="nav-item"><a href="#" onclick="reviewTablet(this)" class="nav-link" id="2">태블릿 PC</a></li>
-                    <li class="nav-item"><a href="#" onclick="reviewPhone(this)" class="nav-link" id="3">스마트폰</a></li>
-                    <li class="nav-item"><a href="#" onclick="reviewwatch(this)" class="nav-link" id="4">스마트워치</a></li>
-                    <li class="nav-item"><a href="#" onclick="reviewEtc(this)" class="nav-link" id="5">기타</a></li>
-                </ul>
-            </header>
-        </div>
 <div class="mytitle">
-
-    <h1 class="text-shadow-2">IT리뷰 다나와</h1>
-    <!--        <button onclick="open_box()" class="btn btn-light">리뷰 작성하기 🔥</button>-->
+    <h1 class="text-shadow-2">당근나라</h1>
     <div class="writeReview">
     </div>
 </div>
-<div class="board_wrap">
-    <div class="board_title">
-        <strong>리뷰 등록하기</strong>
-        <button onclick="save_review()" type="button" class="btn btn-secondary">등록</button>
+<div class="deal_wrap">
+    <div>
+        <button onclick="create_post()" type="button" class="btn btn-secondary">등록</button>
     </div>
-    <div class="board_select">
+    <div class="deal_tags_select">
         <div class="input-group mb-3" id="board_select_1">
-            <select class="form-select" id="reviewTags">
+            <select class="form-select" id="deal_tags">
                 <option selected>게시판을 선택해주세요.</option>
-                <option value="1">컴퓨터</option>
-                <option value="2">태블릿PC</option>
-                <option value="3">스마트폰</option>
-                <option value="4">스마트워치</option>
-                <option value="5">기타</option>
-            </select>
-        </div>
-        <div class="input-group mb-3" id="board_select_2">
-            <select class="form-select" id="reviewPoints">
-                <option selected>별점을 선택해주세요.</option>
-                <option value="1">⭐</option>
-                <option value="2">⭐⭐</option>
-                <option value="3">⭐⭐⭐</option>
-                <option value="4">⭐⭐⭐⭐</option>
-                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="1">구매하기</option>
+                <option value="2">판매하기</option>
             </select>
         </div>
     </div>
     <div class="input-group mb-3">
         <input id="image_URL" type="text" class="form-control" placeholder="이미지 URL 입력" aria-label="Username"
                aria-describedby="image_URL">
+        <input id="route_final" type="text" class="form-control" placeholder="이미지 파일명 입력" aria-label="Username"
+               aria-describedby="image_file_name">
     </div>
     <div class="board_info">
         <div class="input-group mb-3">
             <input id="title" type="text" class="form-control" placeholder="제목 입력" aria-label="Username"
                    aria-describedby="title">
-        </div>
-        <div class="input-group mb-3" id="board_info_2">
-            <input id="writer" type="text" class="form-control" placeholder="글쓴이 입력" aria-label="Username"
-                   aria-describedby="writer">
-        </div>
-        <div class="input-group mb-3" id="board_info_3">
-            <input id="password" type="text" class="form-control" placeholder="비밀번호 입력" aria-label="Username"
-                   aria-describedby="password">
+            <input id="price" type="text" class="form-control" placeholder="가격" aria-label="Username"
+                   aria-describedby="title">
         </div>
     </div>
     <div class="input-group">
-        <textarea id="review" class="form-control" aria-label="With textarea"></textarea>
+        <textarea id="contents" class="form-control" aria-label="With textarea"></textarea>
     </div>
 </div>
 </body>
