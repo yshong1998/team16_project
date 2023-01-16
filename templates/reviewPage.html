@@ -19,39 +19,11 @@
             /*font-family: 'Open Sans', sans-serif;*/
             font-family: 'Noto Sans KR', sans-serif;
         }
-.deal_wrap {
-    width: 1000px;
-    margin: auto;
-}
-
-.board_title {
-    font-size: x-large;
-    padding: 15px 0px 15px 0px;
-    border-bottom: 1px solid black;
-}
-
-.deal_tags_select {
-    /*background-color: red;*/
-    width: 100%;
-    padding: 15px 0px 0px 0px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.board_info {
-    /*background-color: blue;*/
-    padding: 0px 0px 0px 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .mytitle {
     height: 300px;
     width: 100%;
-    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.techadvisor.com/wp-content/uploads/2022/09/iPhone-14-Pro_review_1.jpg?resize=1024%2C576&quality=50&strip=all");
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/img.png");
 
     background-position: center;
     background-size: cover;
@@ -63,40 +35,40 @@
     justify-content: center;
     align-items: center;
 }
+.outline {
+    padding: 10px 10px 10px 10px;
 
-.board_info > div {
-    margin-right: 15px;
 }
-
-#board_info_2 {
-    width: 35%;
+.carrot_title {
+   padding: 10px 10px 10px 10px;
 }
-
-#board_info_3 {
-    margin-right: 0px;
-    width: 40%;
+.carrot_product{
+    padding:10px 10px 10px 10px;
 }
-
-#board_select_1 {
-    margin-right: 15px;
+.carrot_price {
+    padding:10px 10px 10px 10px;
 }
-
-#board_select_2 {
-    width: 40%;
+.carrot_contact {
+    padding:10px 10px 10px 10px;
 }
+.text_desc{
+    height: 400px;
+    width: 50%;
+    border:1px solid;
+    padding:10px 10px 10px 10px;
+    margin: auto;
 
-.input-group > textarea {
-    height: 350px;
 }
-
-.bt_wrap button {
-    margin-right: 10px;
+.text_in_box {
+    height: 100px;
+    width: 50%;
+    border:1px solid;
+    padding:10px 10px 10px 10px;
+    margin: auto;
 }
-
-button {
-    float: right;
+.carrot_desc {
+    padding:10px 10px 10px 10px;
 }
-
 </style>
 <script>
 </script>
@@ -105,42 +77,48 @@ button {
             <header class="d-flex justify-content-center py-3">
                 <ul class="nav nav-pills gap-2">
                     <li class="nav-item"><a href="/" class="nav-link" aria-current="page">전체</a></li>
-                    <li class="nav-item"><a href="#" onclick="reviewComputer(this)" class="nav-link" aria-current="page" id="1">컴퓨터</a></li>
-                    <li class="nav-item"><a href="#" onclick="reviewTablet(this)" class="nav-link" id="2">태블릿 PC</a></li>
-                    <li class="nav-item"><a href="#" onclick="reviewPhone(this)" class="nav-link" id="3">스마트폰</a></li>
-                    <li class="nav-item"><a href="#" onclick="reviewwatch(this)" class="nav-link" id="4">스마트워치</a></li>
-                    <li class="nav-item"><a href="#" onclick="reviewEtc(this)" class="nav-link" id="5">기타</a></li>
+                    <li class="nav-item"><a href="#" onclick="reviewComputer(this)" class="nav-link" aria-current="page" id="1">판매글</a></li>
+                    <li class="nav-item"><a href="#" onclick="reviewTablet(this)" class="nav-link" id="2">구매글</a></li>
+
                 </ul>
             </header>
         </div>
 <div class="mytitle">
 
-    <h1 class="text-shadow-2">IT리뷰 다나와</h1>
+    <h1 class="text-shadow-2">당근 나라</h1>
     <!--        <button onclick="open_box()" class="btn btn-light">리뷰 작성하기 🔥</button>-->
     <div class="writeReview">
     </div>
 </div>
-<div class="deal_wrap">
-    <div class="board_title">
-    </div>
-    <div class="deal_tags_select">
-        <div class="input-group mb-3" id="board_select_1">
-        </div>
-        <div class="input-group mb-3" id="board_select_2">
+<div class="outline">
+    <div class="carrot_title">
+        <div class="text_in_box" id="title">
+            title
         </div>
     </div>
-    <div class="input-group mb-3">
+    <div class="carrot_product">
+        <div class="text_in_box" id="product">
+            product
+        </div>
     </div>
-    <div class="board_info">
+    <div class="carrot_price">
+        <div class="text_in_box" id="text">
+            price
+        </div>
+    </div>
+    <div class="carrot_contact">
+        <div class="text_in_box" id="contact">
+            contact
+        </div>
+    </div>
+    <div class="carrot_desc">
+        <div class="text_desc" id="text_box">
+            text box
+        </div>
+    </div>
 
-    </div>
-        <div class="input-group mb-3" id="board_info_2">
-        </div>
-        <div class="input-group mb-3" id="board_info_3">
-        </div>
-    </div>
-    <div class="input-group">
-    </div>
 </div>
+
+
 </body>
 </html>
