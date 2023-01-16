@@ -1,17 +1,30 @@
 from flask import Flask, render_template, request, jsonify
-app = Flask(__name__, template_folder="templates")
-
+from key import *
 from pymongo import MongoClient
 import certifi
 
+
 ca = certifi.where()
+app = Flask(__name__, template_folder="templates")
 
 client = MongoClient('mongodb+srv://test:sparta@cluster0.gvsa3p3.mongodb.net/Cluster0?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.dbsparta
 
+@app.route("/review", methods=["POST"])
+def s3_upload_img():
+    review_route = request.form['image_give']
+    title = request.form['title_give']
+    data = open(review_route + title, 'rb')
+    # data = open(review_route + f + '.jpg', 'rb')
+    s3.Bucket(BUCKET_NAME).put_object(
+        Key=title, Body=data, ContentType='image/jpg')
+
+    return jsonify({'msg': '등록완료'})
+
 @app.route('/')
 def home():
     return render_template('index.html')
+
 
 @app.route('/reviewWritePage.html')
 def reviewwritepage():
@@ -21,6 +34,32 @@ def reviewwritepage():
 @app.route('/reviewPage.html')
 def reviewpage():
     return render_template('reviewPage.html')
+
+
+@app.route('/etcReview.html')
+def etcReview():
+    return render_template('etcReview.html')
+
+
+@app.route('/computerReview.html')
+def computerReview():
+    return render_template('computerReview.html')
+
+
+@app.route('/smartPhoneReview.html')
+def smartPhoneReview():
+    return render_template('smartPhoneReview.html')
+
+
+@app.route('/smartWatchReview.html')
+def smartWatchReview():
+    return render_template('smartWatchReview.html')
+
+
+@app.route('/TabletReview.html')
+def TabletReview():
+    return render_template('TabletReview.html')
+
 
 
 @app.route("/review", methods=["POST"])
